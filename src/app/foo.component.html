@@ -1,0 +1,10 @@
+<input
+  type="text"
+  class="block mb2 field"
+  placeholder="Sup?"
+  (keyup.enter)="add()"
+  [(ngModel)]="val"
+/>
+<div>
+  <p class='m0' *ngFor="let item of items">{{ item }}</p>
+</div>

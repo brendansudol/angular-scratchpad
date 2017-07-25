@@ -1,0 +1,31 @@
+<div *ngIf="!name; else forminfo">
+  <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
+    <h3>Reactive Form</h3>
+    <div class='mb2'>
+      <label>Name</label>
+      <input class='field block' type="text" formControlName="name">
+      <div class="alert" *ngIf="!rForm.controls['name'].valid && rForm.controls['name'].touched">{{ titleAlert }}</div>
+    </div>
+    <div class='mb2'>
+      <label>Description</label>
+      <textarea class='field block' formControlName="description"></textarea>
+      <div class="alert" *ngIf="!rForm.controls['description'].valid && rForm.controls['description'].touched">You must specify a description that's between 30 and 500 characters.</div>
+    </div>
+    <div class='mb2'>
+      <label class='block'>
+        <input type="checkbox" formControlName="validate" value="1">
+        Extra name validation
+      </label>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!rForm.valid">
+      Submit
+    </button>
+  </form>
+</div>
+
+<ng-template #forminfo>
+  <div>
+    <h3>{{ name }}</h3>
+    <p>{{ description }}</p>
+  </div>
+</ng-template>

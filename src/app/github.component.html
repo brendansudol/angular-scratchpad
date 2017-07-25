@@ -1,0 +1,58 @@
+<div>
+  <input
+    #place
+    type="text"
+    class='mb1 field'
+    placeholder="Location"
+    (keyup.enter)="search(place.value, language.value)"
+  >
+  <input
+    #language
+    type="text"
+    class='mb1 field'
+    placeholder="Language"
+    (keyup.enter)="search(place.value, language.value)"
+  >
+  <button
+    class='mb1 btn btn-primary'
+    (click)="search(place.value, language.value)"
+  >
+    Search
+  </button>
+</div>
+
+<div>
+  <p *ngIf="error_text">{{ error_text }}</p>
+  <div class='clearfix mxn2'>
+    <div class='sm-col sm-col-8 p2'>
+      <div class='clearfix mxn1'>
+        <div
+          class='col col-6 sm-col-3 px1 mb2'
+          *ngFor="let user of results"
+          (click)="getDetails(user.login)"
+        >
+          <div class='p2 border rounded center'>
+            <img class='circle' src="{{ user.avatar_url }}" width="40" height="40">
+            <a class='block h5 truncate' href="{{ user.html_url }}">{{ user.login }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='sm-col sm-col-4 p2'>
+      <div *ngIf="results.length && selected">
+        <div class="p2 h5 border rounded">
+          <img class='circle' src="{{ user.avatar_url }}" width='50' height='50'>
+          <p class='mb1' *ngIf="user.name">Name: {{ user.name }}</p>
+          <p class='mb1' *ngIf="user.email">Email: {{ user.email }}</p>
+          <p class='mb1' *ngIf="user.location">Location: {{ user.location }}</p>
+          <p class='mb1' *ngIf="user.bio">Bio: {{ user.bio }}</p>
+          <p class='mb1' *ngIf="user.public_repos">Repos: {{ user.public_repos }}</p>
+          <p class='mb1' *ngIf="user.public_gists">Gists: {{ user.public_gists }}</p>
+          <p class='mb1' *ngIf="user.followers">Followers: {{ user.followers }}</p>
+          <p class='mb1' *ngIf="user.created_at">Joined: {{ user.created_at | date }}</p>
+          <button class="btn p0" (click)="selected = !selected">Back</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
